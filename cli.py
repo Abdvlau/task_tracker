@@ -156,6 +156,9 @@ Examples:
         
         elif command == "list":
             status = args[1] if len(args) > 1 else None
+            if status and status not in Task.VALID_STATUSES:
+                print(f"Error: Invalid status '{status}'. Must be one of: {', '.join(Task.VALID_STATUSES)}")
+                return
             self.list_tasks(status)
         
         elif command == "help":

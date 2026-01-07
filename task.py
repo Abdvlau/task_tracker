@@ -7,6 +7,8 @@ from typing import Optional
 class Task:
     """Represents a task with an ID, description, status, and timestamps."""
     
+    VALID_STATUSES = {"todo", "in-progress", "done"}
+    
     def __init__(
         self,
         task_id: int,
@@ -54,6 +56,8 @@ class Task:
     
     def update_status(self, new_status: str) -> None:
         """Update task status and timestamp."""
+        if new_status not in self.VALID_STATUSES:
+            raise ValueError(f"Invalid status: {new_status}. Must be one of {self.VALID_STATUSES}")
         self.status = new_status
         self.updated_at = datetime.now().isoformat()
     
