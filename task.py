@@ -27,6 +27,8 @@ class Task:
             created_at: Creation timestamp (ISO format)
             updated_at: Last update timestamp (ISO format)
         """
+        if status not in self.VALID_STATUSES:
+            raise ValueError(f"Invalid status: {status}. Must be one of {self.VALID_STATUSES}")
         self.id = task_id
         self.description = description
         self.status = status
